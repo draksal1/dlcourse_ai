@@ -30,7 +30,6 @@ class Trainer:
                  learning_rate_decay=1.0):
         """
         Initializes the trainer
-
         Arguments:
         model - neural network model
         dataset, instance of Dataset class - data to train on
@@ -99,10 +98,8 @@ class Trainer:
                 # TODO Generate batches based on batch_indices and
                 # use model to generate loss and gradients for all
                 # the params
-
                 batch_X = self.dataset.train_X[batch_indices]
                 batch_y = self.dataset.train_y[batch_indices]
-
                 loss = self.model.compute_loss_and_gradients(batch_X, batch_y)
 
                 for param_name, param in self.model.params().items():
@@ -111,9 +108,9 @@ class Trainer:
 
                 batch_losses.append(loss)
 
-            if np.not_equal(self.learning_rate_decay, 1.0):
-                self.learning_rate *= self.learning_rate_decay
-
+            # TODO: Implement learning rate decay
+            self.learning_rate *= self.learning_rate_decay
+ 
             ave_loss = np.mean(batch_losses)
 
             train_accuracy = self.compute_accuracy(self.dataset.train_X,
